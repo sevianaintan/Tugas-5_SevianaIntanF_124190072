@@ -11,14 +11,14 @@ import java.util.List;
 @Dao
 public interface DataKampusDAO {
     @Insert
-    Long insertData(DataKampus dataKampus);
+    Long insertData(com.example.database_lokal.entity.DataKampus dataKampus);
 
-    @Query("SELECT * FROM kampus_db")
-    List<DataKampus> getData();
+    @Query("Select * from 'kampus_db'_db")
+    List<com.example.database_lokal.entity.DataKampus> getData();
 
     @Update
-    int updateData(DataKampus item);
+    int updateData(com.example.database_lokal.entity.DataKampus item);
 
     @Delete
-    void deleteData(DataKampus item);
+    void deleteData(com.example.database_lokal.entity.DataKampus item);
 }

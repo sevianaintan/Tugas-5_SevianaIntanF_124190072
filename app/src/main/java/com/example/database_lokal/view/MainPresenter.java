@@ -8,15 +8,16 @@ import com.example.database_lokal.entity.DataKampus;
 
 import java.util.List;
 
-public class MainPresenter implements MainContact.presenter {
-    private MainContact.view view;
+public class MainPresenter implements com.example.database_lokal.view.MainContact.presenter {
+    private com.example.database_lokal.view.MainContact.view view;
 
-    public MainPresenter(MainContact.view view){
+    public MainPresenter(com.example.database_lokal.view.MainContact.view view){
         this.view=view;
     }
     class InsertData extends AsyncTask<Void,Void,Long> {
         private AppDatabase appDatabase;
         private DataKampus dataKampus;
+
         public InsertData(AppDatabase appDatabase, DataKampus dataKampus){
             this.appDatabase = appDatabase;
             this.dataKampus = dataKampus;
@@ -33,7 +34,7 @@ public class MainPresenter implements MainContact.presenter {
     }
 
     @Override
-    public void insertData(String nama, String alamat, int jumlah, AppDatabase database) {
+    public void insertData(String nama, String alamat, String jumlah, AppDatabase database) {
         final DataKampus dataKampus = new DataKampus();
         dataKampus.setName(nama);
         dataKampus.setAddress(alamat);
@@ -48,6 +49,8 @@ public class MainPresenter implements MainContact.presenter {
         view.getData(list);
 
     }
+
+
     class EditData extends AsyncTask<Void, Void, Integer>{
         private AppDatabase appDatabase;
         private DataKampus dataKampus;
@@ -68,7 +71,7 @@ public class MainPresenter implements MainContact.presenter {
     }
 
     @Override
-    public void editData(String nama, String alamat, int jumlah, int id, AppDatabase database) {
+    public void editData(String nama, String alamat, String jumlah, int id, AppDatabase database) {
         final DataKampus dataKampus = new DataKampus();
         dataKampus.setName(nama);
         dataKampus.setAddress(alamat);

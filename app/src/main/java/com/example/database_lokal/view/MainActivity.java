@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,8 +23,8 @@ import static android.widget.Toast.makeText;
 
 public class MainActivity extends AppCompatActivity implements MainContact.view {
     private AppDatabase appDatabase;
-    private MainAdapter mainAdapter;
     private MainPresenter mainPresenter;
+    private MainAdapter mainAdapter;
 
     private Button btnOK;
     private RecyclerView recyclerView;
@@ -38,7 +37,9 @@ public class MainActivity extends AppCompatActivity implements MainContact.view 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         btnOK =findViewById(R.id.btn_submit);
+        btnOK.setOnClickListener(this);
         etNama=findViewById(R.id.et_nama);
         etAlamat=findViewById(R.id.et_alamat);
         etJumlah=findViewById(R.id.et_mhs);
@@ -49,28 +50,6 @@ public class MainActivity extends AppCompatActivity implements MainContact.view 
         mainPresenter=new MainPresenter(this);
         mainPresenter.readData(appDatabase);
 
-        btnOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    DataKampus dataKampus = new DataKampus();
-
-                    dataKampus.setName(etNama.getText().toString());
-                    dataKampus.setAddress(etAlamat.getText().toString());
-                    dataKampus.setMhs(Integer.parseInt(etJumlah.getText().toString()));
-
-                    appDatabase.dao().insertData(dataKampus);
-
-                    Log.d("MainAcitity" , "sukses ");
-                    Toast.makeText(getApplicationContext(),"Tersimpan", Toast.LENGTH_SHORT).show();
-
-
-                }catch (Exception ex){
-                    Log.e("MainAcitity" , "gagal menyimpan , msg : "+ex.getMessage());
-                    Toast.makeText(getApplicationContext(),"Gagal Menyimpan", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     @Override
@@ -81,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements MainContact.view 
 
     @Override
     public void successDelete() {
-        makeText(this,"Berhasil Menghapus", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Berhasil Menghapus", Toast.LENGTH_SHORT).show();
         mainPresenter.readData(appDatabase);
     }
 
@@ -104,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements MainContact.view 
         etNama.setText(item.getName());
         etAlamat.setText(item.getAddress());
         etJumlah.setText(item.getMhs());
+        id = item.getId();
         edit = true;
         btnOK.setText("Edit Data");
     }
@@ -116,30 +96,32 @@ public class MainActivity extends AppCompatActivity implements MainContact.view 
         }else {
             builder=new AlertDialog.Builder(this);
         }
-        builder.setTitle("Menghapus Data").setMessage("Anda Yakin Ingin menghapus data ini?").setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+        builder.setTitle("Menghapus Data")
+                .setMessage("Anda Yakin Ingin menghapus data ini?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int i) {
+            public void onClick(DialogInterface dialog, int which) {
                 resetForm();
                 mainPresenter.deleteData(item,appDatabase);
             }
         }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(DialogInterface dialogInterface, int which) {
                 dialogInterface.cancel();
             }
-        }).setIcon(android.R.drawable.ic_dialog_dialer);
+        }).setIcon(android.R.drawable.ic_dialog_dialer).show();
     }
 
     @Override
     public void onClick(View view) {
         if (view==btnOK){
             if (etNama.getText().toString().equals("")||etAlamat.getText().toString().equals("")||etJumlah.getText().toString().equals("")){
-                makeText(this,"Harap Isi Semua Data!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Harap Isi Semua Data!", Toast.LENGTH_SHORT).show();
             }else {
                 if (!edit){
-                    mainPresenter.insertData(etNama.getText().toString(),etAlamat.getText().toString(),Integer.parseInt(etJumlah.getText().toString()),appDatabase);
+                    mainPresenter.insertData(etNama.getText().toString(),etAlamat.getText().toString(), etJumlah.getText().toString() ,appDatabase);
                 }else {
-                    mainPresenter.editData(etNama.getText().toString(), etAlamat.getText().toString(),Integer.parseInt(etJumlah.getText().toString()),id,appDatabase);
+                    mainPresenter.editData(etNama.getText().toString(), etAlamat.getText().toString(), etJumlah.getText().toString() ,id,appDatabase);
                     edit = false;
                 }
                 resetForm();

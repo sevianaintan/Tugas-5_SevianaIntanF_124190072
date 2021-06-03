@@ -15,7 +15,7 @@ import com.example.database_lokal.entity.DataKampus;
 
 import java.util.List;
 
-public class MainAdapter extends RecyclerView.Adapter<MainAdapter.viewHolder> {
+public class MainAdapter extends RecyclerView.Adapter<com.example.database_lokal.view.MainAdapter.viewHolder> {
     Context context;
     List<DataKampus> list;
     MainContact.view mView;
@@ -34,7 +34,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.viewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull viewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull com.example.database_lokal.view.MainAdapter.viewHolder holder, int position) {
         final DataKampus item = list.get(position);
         holder.tvNama.setText(item.getName());
         holder.tvAlamat.setText(item.getAddress());

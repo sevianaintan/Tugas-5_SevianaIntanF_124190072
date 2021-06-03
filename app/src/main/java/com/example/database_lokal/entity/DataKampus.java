@@ -10,13 +10,13 @@ public class DataKampus {
     @NonNull
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    private int id;
+        private int id;
     @ColumnInfo(name = "name")
-    private String name;
+        private String name;
     @ColumnInfo(name = "address")
-    private String address;
+        private String address;
     @ColumnInfo(name = "jumlah")
-    private int mhs;
+        private String mhs;
 
     public int getId() {
         return id;
@@ -42,11 +42,11 @@ public class DataKampus {
         this.address = address;
     }
 
-    public int getMhs() {
+    public String getMhs() {
         return mhs;
     }
 
-    public void setMhs(int mhs) {
+    public void setMhs(String mhs) {
         this.mhs = mhs;
     }
 

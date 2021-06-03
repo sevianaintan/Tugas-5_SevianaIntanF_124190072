@@ -1,64 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#008a70"
-    tools:context=".view.MainActivity">
+    android:background="@color/white">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Input Data Diri!"
-        android:textSize="20pt"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:gravity="center_horizontal"
-        android:textColor="@color/black"
-        android:id="@+id/judul"/>
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5pt"
+        android:layout_marginRight="5pt"
+        tools:context=".view.MainActivity">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Input Data Diri!"
+            android:textSize="20pt"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:textColor="@color/black"
+            android:id="@+id/judul"/>
 
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_nama"
-        android:textSize="21sp"
-        android:hint="Nama Lengkap"
-        android:layout_below="@id/judul"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_nama"
+            android:textSize="21sp"
+            android:hint="Nama Lengkap"
+            android:layout_below="@id/judul"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_alamat"
-        android:hint="Alamat "
-        android:textSize="21sp"
-        android:layout_below="@id/et_nama"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_alamat"
+            android:hint="Alamat "
+            android:textSize="21sp"
+            android:layout_below="@id/et_nama"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_mhs"
-        android:layout_below="@id/et_alamat"
-        android:hint="Jumlah Pesanan"
-        android:textSize="21sp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_mhs"
+            android:layout_below="@id/et_alamat"
+            android:hint="Email"
+            android:textSize="21sp" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_submit"
-        android:text="Submit"
-        android:layout_alignParentBottom="true"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rc_main"
+            android:layout_margin="4dp"
+            android:background="@color/cardview_shadow_end_color"
+            android:layout_above="@id/btn_submit"
+            android:layout_below="@id/et_mhs">
+        </androidx.recyclerview.widget.RecyclerView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/rc_main"
-        android:layout_margin="4dp"
-        android:background="@color/cardview_shadow_end_color"
-        android:layout_above="@id/btn_submit"
-        android:layout_below="@id/et_mhs">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_submit"
+            android:text="Submit"
+            app:backgroundTint="@color/teal_700"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/et_mhs"/>
 
-    </androidx.recyclerview.widget.RecyclerView>
 
-</RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

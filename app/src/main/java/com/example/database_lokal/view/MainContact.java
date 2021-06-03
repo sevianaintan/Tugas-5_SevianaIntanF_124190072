@@ -17,9 +17,9 @@ public interface MainContact {
         void deleteData(DataKampus item);
     }
     interface presenter{
-        void insertData(String nama, String alamat, int jumlah, AppDatabase database);
+        void insertData(String nama, String alamat, String jumlah, AppDatabase database);
         void readData(AppDatabase database);
-        void editData(String nama, String alamat, int jumlah, int id, AppDatabase database);
+        void editData(String nama, String alamat, String jumlah, int id, AppDatabase database);
         void deleteData(DataKampus dataKampus, AppDatabase appDatabase);
     }
 }
